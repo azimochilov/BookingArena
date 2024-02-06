@@ -1,8 +1,8 @@
 package com.booking.service;
 
-import com.booking.domain.dtos.UserCreationDto;
-import com.booking.domain.dtos.UserResultDto;
-import com.booking.domain.dtos.UserUpdateDto;
+import com.booking.domain.dtos.users.UserCreationDto;
+import com.booking.domain.dtos.users.UserResultDto;
+import com.booking.domain.dtos.users.UserUpdateDto;
 
 import java.util.List;
 

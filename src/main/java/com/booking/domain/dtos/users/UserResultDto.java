@@ -1,4 +1,4 @@
-package com.booking.domain.dtos;
+package com.booking.domain.dtos.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserUpdateDto {
+public class UserResultDto {
     private String username;
 
     private String password;
