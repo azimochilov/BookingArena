@@ -16,5 +16,4 @@ import java.util.List;
 public class RoleResultDto {
     private String name;
     private List<PrivilegeResultDto> privileges;
-
 }

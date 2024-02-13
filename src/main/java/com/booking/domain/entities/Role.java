@@ -30,6 +30,8 @@ public class Role {
 
     @Column(name = "created_at")
     private Instant createdAt;
+
     @Column(name = "updated_at")
     private Instant updatedAt;
+
 }

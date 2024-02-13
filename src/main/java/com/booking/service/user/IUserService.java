@@ -1,4 +1,4 @@
-package com.booking.service;
+package com.booking.service.user;
 
 import com.booking.domain.dtos.users.UserCreationDto;
 import com.booking.domain.dtos.users.UserResultDto;

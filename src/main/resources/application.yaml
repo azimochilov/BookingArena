@@ -1,1 +1,33 @@
+server:
+  port: 8081
 
+spring:
+  flyway:
+    enabled: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/arena
+    username: postgres
+    password: Yaironman@.26
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: azimochilov29@gmail.com
+    password: "ovju mahs dzom kgis"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  security:
+    jwt:
+      secret-key: secret

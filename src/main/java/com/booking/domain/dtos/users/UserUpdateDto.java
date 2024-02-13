@@ -1,5 +1,6 @@
 package com.booking.domain.dtos.users;
 
+import com.booking.domain.dtos.addresses.AddressUpdateDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,10 @@ public class UserUpdateDto {
     private String password;
 
     private String email;
+
+    private AddressUpdateDto addressUpdateDto;
+
+    private String role;
+
+    private boolean isActive;
 }

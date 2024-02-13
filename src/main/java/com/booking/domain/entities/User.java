@@ -28,4 +28,15 @@ public class User {
 
     @Column(name = "email")
     private String email;
+
+    @OneToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id" , referencedColumnName = "id")
+    private Role role;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean isActive = false;
 }
