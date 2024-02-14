@@ -93,13 +93,11 @@ public class UserService implements IUserService {
                 () -> new NotFoundException("Not found given role")
         );
 
-//        user.setRole(role);
-//        user.setUsername(userDto.getUsername());
-//        user.setEmail(userDto.getEmail());
-//        user.setAddress(AddressMapper.INSTANCE.addressUpdateDtoToAddress(userDto.getAddressUpdateDto()));
-//        user.setActive(userDto.isActive());
-
-       user = UserMapper.INSTANCE.userUpdateDtoToUser(userDto);
+        user.setRole(role);
+        user.setUsername(userDto.getUsername());
+        user.setEmail(userDto.getEmail());
+        user.setAddress(AddressMapper.INSTANCE.addressUpdateDtoToAddress(userDto.getAddressUpdateDto()));
+        user.setActive(userDto.isActive());
 
         userRepository.save(user);
 
