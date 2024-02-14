@@ -59,7 +59,7 @@ public class UserService implements IUserService {
 
     @Override
     public List<UserResultDto> getAll() {
-        List<User> users = userRepository.getAll();
+        List<User> users = userRepository.findAll();
         return UserMapper.INSTANCE.usersToUserResultDtos(users);
     }
 
