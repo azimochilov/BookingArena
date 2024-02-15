@@ -1,6 +1,7 @@
 package com.booking.security;
 
 
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -52,7 +53,6 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-
     @Bean
     @Lazy
     public PasswordEncoder passwordEncoder() {
@@ -65,6 +65,7 @@ public class WebSecurityConfig {
                 .userDetailsService(customUserDetailService)
                 .passwordEncoder(passwordEncoder())
                 .and().build();
+
     }
 
 
