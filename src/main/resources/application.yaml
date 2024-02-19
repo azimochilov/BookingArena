@@ -28,6 +28,16 @@ spring:
           auth: true
           starttls:
             enable: true
+
+  springdoc:
+    api-docs:
+      path: /api-docs
+    swagger-ui:
+      path: /swagger-ui.html
+      enabled: true
+
   security:
     jwt:
       secret-key: secret
+
+
