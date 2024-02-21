@@ -4,6 +4,7 @@ package com.booking.api.address;
 import com.booking.domain.dtos.addresses.AddressCreationDto;
 import com.booking.domain.dtos.addresses.AddressResultDto;
 import com.booking.domain.dtos.addresses.AddressUpdateDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,9 +18,9 @@ import java.util.List;
 public class AddressController {
     private final AddressService addressService;
 
-    @PreAuthorize("hasAuthority('CREATE_USER')")
+    //@PreAuthorize("hasAuthority('CREATE_USER')")
     @PostMapping
-    public ResponseEntity create(@RequestBody AddressCreationDto addressCreationDto){
+    public ResponseEntity create(@RequestBody @Valid AddressCreationDto addressCreationDto){
         var address = addressService.create(addressCreationDto);
         return ResponseEntity.ok(address);
     }

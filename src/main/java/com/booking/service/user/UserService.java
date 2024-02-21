@@ -20,16 +20,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.Conditions;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@Data
-@Builder
 @RequiredArgsConstructor
 @Transactional
 public class UserService implements IUserService {
@@ -39,28 +41,41 @@ public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final EmailVerificationService emailVerificationService;
+    private final ModelMapper modelMapper;
     @Override
     public UserResultDto create(UserCreationDto userDto) {
 
         Role role = roleRepository.findByName("USER").orElseThrow(
-                () -> new NotFoundException("Not fit any role at all")
+                () ->   new NotFoundException("Not fit any role at all")
         );
 
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        addressService.create(userDto.getAddressCreationDto());
 
-        User user = UserMapper.INSTANCE.userCreationToUser(userDto);
+        Address address = addressService.createForUser(userDto.getAddressCreationDto());
+
+        User user = modelMapper.map(userDto, User.class);
+        user.setAddress(address);
+        user.setRole(role);
         userRepository.save(user);
+
 
         emailService.send(userDto.getEmail(),"Verify Code", emailVerificationService.generateCode());
 
-        return UserMapper.INSTANCE.userCreationToUserResult(userDto);
+        UserResultDto userResultDto = modelMapper.map(user , UserResultDto.class);
+        userResultDto.setAddressResultDto(modelMapper.map(userDto.getAddressCreationDto(),AddressResultDto.class));
+        userResultDto.setRole(role.getName());
+
+
+        return userResultDto;
     }
 
     @Override
     public List<UserResultDto> getAll() {
         List<User> users = userRepository.findAll();
-        return UserMapper.INSTANCE.usersToUserResultDtos(users);
+        List<UserResultDto> userResultDTOs = users.stream()
+                .map(user -> modelMapper.map(user, UserResultDto.class))
+                .collect(Collectors.toList());
+        return userResultDTOs;
     }
 
     @Override
@@ -70,7 +85,7 @@ public class UserService implements IUserService {
                 () -> new NotFoundException("user not found with given username")
         );
 
-        return UserMapper.INSTANCE.userToUserResult(user);
+        return modelMapper.map(user, UserResultDto.class);
     }
 
     @Override
@@ -80,14 +95,16 @@ public class UserService implements IUserService {
                 () -> new NotFoundException("user not found with given id")
         );
 
-        return UserMapper.INSTANCE.userToUserResult(user);
+        return modelMapper.map(user, UserResultDto.class);
     }
 
     @Override
     public UserResultDto update(Long id, UserUpdateDto userDto) {
+        modelMapper.getConfiguration().setSkipNullEnabled(false);
         User user = userRepository.getUserByUserId(id).orElseThrow(
                 () -> new NotFoundException("User not found with this id! ")
         );
+        modelMapper.map(userDto,user);
 
         Role role = roleRepository.findByName(userDto.getRole()).orElseThrow(
                 () -> new NotFoundException("Not found given role")

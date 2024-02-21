@@ -1,7 +1,9 @@
 package com.booking.service.privilege;
 
+import com.booking.domain.dtos.addresses.AddressResultDto;
 import com.booking.domain.dtos.privileges.PrivilegeCreationDto;
 import com.booking.domain.dtos.privileges.PrivilegeResultDto;
+import com.booking.domain.dtos.users.UserResultDto;
 import com.booking.domain.entities.Address;
 import com.booking.domain.entities.Privilege;
 import com.booking.exception.NotFoundException;
@@ -10,21 +12,25 @@ import com.booking.repository.PrivilegeRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class PrivilegeService implements IPrivilegeServicec{
     private final PrivilegeRepository privilegeRepository;
+    private final ModelMapper modelMapper;
     @Override
     public PrivilegeResultDto create(PrivilegeCreationDto privilegeDto) {
-        Privilege privilege = PrivilegeMapper.INSTANCE.privilegeCreationToPrivilege(privilegeDto);
-
-        return PrivilegeMapper.INSTANCE.privilegeToPrivilegeResult(privilege);
+        Privilege privilege = modelMapper.map(privilegeDto, Privilege.class);
+        privilegeRepository.save(privilege);
+        return modelMapper.map(privilegeDto, PrivilegeResultDto.class);
     }
 
     @Override
@@ -34,7 +40,7 @@ public class PrivilegeService implements IPrivilegeServicec{
                 () -> new NotFoundException("not found with given id")
         );
 
-        return PrivilegeMapper.INSTANCE.privilegeToPrivilegeResult(privilege);
+        return modelMapper.map(privilege, PrivilegeResultDto.class);
     }
 
     @Override
@@ -48,7 +54,7 @@ public class PrivilegeService implements IPrivilegeServicec{
 
         privilegeRepository.save(privilege);
 
-        return PrivilegeMapper.INSTANCE.privilegeToPrivilegeResult(privilege);
+        return modelMapper.map(privilegeDto, PrivilegeResultDto.class);
     }
 
     @Override
@@ -56,7 +62,11 @@ public class PrivilegeService implements IPrivilegeServicec{
 
         List<Privilege> privileges = privilegeRepository.findAll();
 
-        return PrivilegeMapper.INSTANCE.privilegesToResultPrivileges(privileges);
+        List<PrivilegeResultDto> privilegeResultDTOs = privileges.stream()
+                .map(priv -> modelMapper.map(priv, PrivilegeResultDto.class))
+                .collect(Collectors.toList());
+
+        return privilegeResultDTOs;
     }
 
     @Override

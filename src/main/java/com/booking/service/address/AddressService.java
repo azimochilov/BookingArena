@@ -10,6 +10,7 @@ import com.booking.repository.AddressRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,13 +20,20 @@ import org.springframework.stereotype.Service;
 public class AddressService implements IAddressService{
 
     private final AddressRepository addressRepository;
+    private final ModelMapper modelMapper;
     @Override
     public AddressResultDto create(AddressCreationDto addressDto) {
 
-        Address address = AddressMapper.INSTANCE.addressCreationDtoToAddress(addressDto);
+        Address address = modelMapper.map(addressDto, Address.class);
         addressRepository.save(address);
 
-        return AddressMapper.INSTANCE.addressToAddressResultDto(address);
+        return modelMapper.map(address, AddressResultDto.class);
+    }
+
+    @Override
+    public Address createForUser(AddressCreationDto addressCreationDto) {
+        Address address = modelMapper.map(addressCreationDto,Address.class);
+        return addressRepository.save(address);
     }
 
     @Override
@@ -41,7 +49,7 @@ public class AddressService implements IAddressService{
 
         addressRepository.save(existingAddress);
 
-        return AddressMapper.INSTANCE.addressToAddressResultDto(existingAddress);
+        return modelMapper.map(existingAddress, AddressResultDto.class);
     }
 
     @Override
@@ -52,7 +60,17 @@ public class AddressService implements IAddressService{
                         () -> new NotFoundException("Address not found")
                 );
 
-        return AddressMapper.INSTANCE.addressToAddressResultDto(existingAddress);
+        return modelMapper.map(existingAddress, AddressResultDto.class);
+    }
+
+    @Override
+    public AddressResultDto getByName(String name) {
+        Address existingAddress = addressRepository.findByCity(name)
+                .orElseThrow(
+                        () -> new NotFoundException("Address not found")
+                );
+
+        return modelMapper.map(existingAddress, AddressResultDto.class);
     }
 
     @Override
