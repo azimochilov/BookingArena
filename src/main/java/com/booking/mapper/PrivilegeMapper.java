@@ -2,9 +2,7 @@ package com.booking.mapper;
 
 import com.booking.domain.dtos.privileges.PrivilegeCreationDto;
 import com.booking.domain.dtos.privileges.PrivilegeResultDto;
-import com.booking.domain.dtos.roles.RoleResultDto;
-import com.booking.domain.entities.Privilege;
-import com.booking.domain.entities.Role;
+import com.booking.domain.entities.user.Privilege;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

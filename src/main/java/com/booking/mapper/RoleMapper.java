@@ -1,8 +1,7 @@
 package com.booking.mapper;
 
 import com.booking.domain.dtos.roles.RoleResultDto;
-import com.booking.domain.entities.Role;
-import com.booking.domain.entities.User;
+import com.booking.domain.entities.user.Role;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

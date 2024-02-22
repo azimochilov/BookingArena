@@ -1,5 +1,6 @@
 package com.booking.domain.dtos.roles;
 
+import com.booking.domain.dtos.RolePrivilegeDto;
 import com.booking.domain.dtos.privileges.PrivilegeCreationDto;
 import com.booking.domain.dtos.privileges.PrivilegeResultDto;
 import lombok.AllArgsConstructor;
@@ -15,5 +16,5 @@ import java.util.List;
 @NoArgsConstructor
 public class RoleResultDto {
     private String name;
-    private List<PrivilegeResultDto> privileges;
+    private List<RolePrivilegeDto> rolePrivileges;
 }

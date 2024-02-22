@@ -1,13 +1,9 @@
 package com.booking.service.privilege;
 
-import com.booking.domain.dtos.addresses.AddressResultDto;
 import com.booking.domain.dtos.privileges.PrivilegeCreationDto;
 import com.booking.domain.dtos.privileges.PrivilegeResultDto;
-import com.booking.domain.dtos.users.UserResultDto;
-import com.booking.domain.entities.Address;
-import com.booking.domain.entities.Privilege;
+import com.booking.domain.entities.user.Privilege;
 import com.booking.exception.NotFoundException;
-import com.booking.mapper.PrivilegeMapper;
 import com.booking.repository.PrivilegeRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

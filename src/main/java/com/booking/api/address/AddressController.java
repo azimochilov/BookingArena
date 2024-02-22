@@ -13,14 +13,14 @@ import com.booking.service.address.AddressService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/addresses")
+@PreAuthorize("hasAuthority('ADDRESS_SERVICE')")
 @RequiredArgsConstructor
 public class AddressController {
     private final AddressService addressService;
 
-    //@PreAuthorize("hasAuthority('CREATE_USER')")
     @PostMapping
-    public ResponseEntity create(@RequestBody @Valid AddressCreationDto addressCreationDto){
+    public ResponseEntity create(@RequestBody AddressCreationDto addressCreationDto){
         var address = addressService.create(addressCreationDto);
         return ResponseEntity.ok(address);
     }
@@ -30,6 +30,7 @@ public class AddressController {
         addressService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {

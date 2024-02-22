@@ -14,6 +14,7 @@ public interface IRoleService {
     List<RoleResultDto> getAll();
     RoleResultDto update(Long id, RoleUpdateDto roleDto);
     RoleResultDto create(RoleCreationDto roleDto);
+    RoleResultDto addPrivilege(Long roleId, List<PrivilegeCreationDto> privileges);
     void delete(Long id);
 
 }

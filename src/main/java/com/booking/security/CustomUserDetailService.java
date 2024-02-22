@@ -1,10 +1,10 @@
 package com.booking.security;
 
 
-import com.booking.domain.entities.Privilege;
-import com.booking.domain.entities.Role;
-import com.booking.domain.entities.RolePrivilege;
-import com.booking.domain.entities.User;
+import com.booking.domain.entities.user.Privilege;
+import com.booking.domain.entities.user.Role;
+import com.booking.domain.entities.user.RolePrivilege;
+import com.booking.domain.entities.user.User;
 import com.booking.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

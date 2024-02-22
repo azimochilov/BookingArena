@@ -3,7 +3,7 @@ package com.booking.mapper;
 import com.booking.domain.dtos.users.UserCreationDto;
 import com.booking.domain.dtos.users.UserResultDto;
 import com.booking.domain.dtos.users.UserUpdateDto;
-import com.booking.domain.entities.User;
+import com.booking.domain.entities.user.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

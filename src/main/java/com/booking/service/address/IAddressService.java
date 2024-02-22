@@ -3,7 +3,7 @@ package com.booking.service.address;
 import com.booking.domain.dtos.addresses.AddressCreationDto;
 import com.booking.domain.dtos.addresses.AddressResultDto;
 import com.booking.domain.dtos.addresses.AddressUpdateDto;
-import com.booking.domain.entities.Address;
+import com.booking.domain.entities.address.Address;
 
 public interface IAddressService {
     AddressResultDto create(AddressCreationDto addressDto);

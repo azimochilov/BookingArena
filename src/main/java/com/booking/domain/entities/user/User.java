@@ -1,6 +1,7 @@
-package com.booking.domain.entities;
+package com.booking.domain.entities.user;
 
 
+import com.booking.domain.entities.address.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

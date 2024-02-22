@@ -1,4 +1,4 @@
-package com.booking.domain.entities;
+package com.booking.domain.entities.address;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -38,6 +38,6 @@ spring:
 
   security:
     jwt:
-      secret-key: secret
+      secret-key: secret)
 
 

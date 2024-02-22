@@ -3,7 +3,7 @@ package com.booking.mapper;
 import com.booking.domain.dtos.addresses.AddressCreationDto;
 import com.booking.domain.dtos.addresses.AddressResultDto;
 import com.booking.domain.dtos.addresses.AddressUpdateDto;
-import com.booking.domain.entities.Address;
+import com.booking.domain.entities.address.Address;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

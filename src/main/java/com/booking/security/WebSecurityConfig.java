@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -43,6 +44,10 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(registry ->
                         registry
                                 .requestMatchers("/login").permitAll()
+                                .requestMatchers("/addresses").permitAll()
+                                .requestMatchers("/privilege").permitAll()
+                                .requestMatchers("/role").permitAll()
+                                .requestMatchers("/role/{id}/privileges").permitAll()
                                 .requestMatchers("/api/v1/users/*/verify").permitAll()
                                 .requestMatchers("/api/v1/users/*/resend").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/api/v1/users").permitAll()
@@ -53,6 +58,7 @@ public class WebSecurityConfig {
 
         return http.build();
     }
+
     @Bean
     @Lazy
     public PasswordEncoder passwordEncoder() {
@@ -65,9 +71,10 @@ public class WebSecurityConfig {
                 .userDetailsService(customUserDetailService)
                 .passwordEncoder(passwordEncoder())
                 .and().build();
-
     }
 
 
 
 }
+
+

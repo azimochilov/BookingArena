@@ -1,7 +1,7 @@
 package com.booking.security;
 
 
-import com.booking.domain.entities.User;
+import com.booking.domain.entities.user.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.booking.repository;
 
-import com.booking.domain.entities.Address;
+import com.booking.domain.entities.address.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

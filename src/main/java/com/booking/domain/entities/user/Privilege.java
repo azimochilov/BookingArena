@@ -1,5 +1,6 @@
-package com.booking.domain.entities;
+package com.booking.domain.entities.user;
 
+import com.booking.domain.entities.user.RolePrivilege;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "privileges")
+@Table(name = "privilege")
 public class Privilege {
 
     @Id

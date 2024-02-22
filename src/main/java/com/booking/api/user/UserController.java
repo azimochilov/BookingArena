@@ -4,7 +4,6 @@ package com.booking.api.user;
 import com.booking.domain.dtos.users.UserResultDto;
 import com.booking.domain.dtos.users.UserUpdateDto;
 import com.booking.domain.dtos.users.VerifyDto;
-import com.booking.domain.entities.User;
 import com.booking.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

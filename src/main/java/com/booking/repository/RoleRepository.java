@@ -1,5 +1,5 @@
 package com.booking.repository;
-import com.booking.domain.entities.Role;
+import com.booking.domain.entities.user.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

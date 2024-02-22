@@ -1,4 +1,4 @@
-package com.booking.domain.entities;
+package com.booking.domain.entities.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "roles")
+@Table(name = "role")
 public class Role {
 
     @Id

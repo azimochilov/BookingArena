@@ -1,14 +1,13 @@
 package com.booking.domain.dtos.privileges;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@Builder
 public class PrivilegeCreationDto {
     private String name;
 }
