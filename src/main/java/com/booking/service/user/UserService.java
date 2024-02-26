@@ -109,12 +109,12 @@ public class UserService implements IUserService {
         user.setRole(role);
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
-        user.setAddress(AddressMapper.INSTANCE.addressUpdateDtoToAddress(userDto.getAddressUpdateDto()));
+        user.setAddress(modelMapper.map(userDto.getAddressUpdateDto(),Address.class));
         user.setActive(userDto.isActive());
 
         userRepository.save(user);
 
-        return UserMapper.INSTANCE.userToUserResult(user);
+        return modelMapper.map(user,UserResultDto.class);
     }
 
     @Override

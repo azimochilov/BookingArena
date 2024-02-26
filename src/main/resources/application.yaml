@@ -36,8 +36,8 @@ spring:
       path: ${SPRINGDOC_SWAGGER-UI_PATH}
       enabled: ${SPRINGDOC_SWAGGER-UI_ENABLED}
 
-  security:
-    jwt:
-      secret-key: ${SPRING_SECURITY_JWT_SECRET-KEY}
+security:
+  jwt:
+    secret-key: ${SPRING_SECURITY_JWT_SECRET_KEY}
 
 
