@@ -1,43 +1,43 @@
 server:
-  port: 8081
+  port: ${SERVER_PORT}
 
 spring:
   flyway:
-    enabled: true
+    enabled: ${SPRING_FLYWAY_ENABLED}
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/arena
-    username: postgres
-    password: Yaironman@.26
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
 
   jpa:
     hibernate:
-      ddl-auto: none
-    show-sql: true
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL-AUTO}
+    show-sql: ${SPRING_JPA_SHOW-SQL}
+    database: ${SPRING_JPA_DATABASE}
+    database-platform: ${SPRING_JPA_DATABASE-PLATFORM}
 
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: azimochilov29@gmail.com
-    password: "ovju mahs dzom kgis"
+    host: ${SPRING_MAIL_HOST}
+    port: ${SPRING_MAIL_PORT}
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
     properties:
       mail:
         smtp:
-          auth: true
+          auth: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH}
           starttls:
-            enable: true
+            enable: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE}
 
   springdoc:
     api-docs:
-      path: /api-docs
+      path: ${SPRINGDOC_API-DOCS_PATH}
     swagger-ui:
-      path: /swagger-ui.html
-      enabled: true
+      path: ${SPRINGDOC_SWAGGER-UI_PATH}
+      enabled: ${SPRINGDOC_SWAGGER-UI_ENABLED}
 
   security:
     jwt:
-      secret-key: secret)
+      secret-key: ${SPRING_SECURITY_JWT_SECRET-KEY}
 
 
