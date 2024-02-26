@@ -1,6 +1,6 @@
 package com.booking.service.role;
 
-import com.booking.domain.dtos.RolePrivilegeDto;
+import com.booking.domain.dtos.roles.RolePrivilegeDto;
 import com.booking.domain.dtos.privileges.PrivilegeCreationDto;
 import com.booking.domain.dtos.roles.RoleCreationDto;
 import com.booking.domain.dtos.roles.RoleResultDto;
@@ -19,7 +19,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

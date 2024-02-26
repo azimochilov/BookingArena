@@ -1,8 +1,5 @@
 package com.booking.domain.dtos.roles;
 
-import com.booking.domain.dtos.RolePrivilegeDto;
-import com.booking.domain.dtos.privileges.PrivilegeCreationDto;
-import com.booking.domain.dtos.privileges.PrivilegeResultDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.booking.domain.dtos;
+package com.booking.domain.dtos.roles;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
