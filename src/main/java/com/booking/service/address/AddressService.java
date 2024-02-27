@@ -5,7 +5,7 @@ import com.booking.domain.dtos.addresses.AddressResultDto;
 import com.booking.domain.dtos.addresses.AddressUpdateDto;
 import com.booking.domain.entities.address.Address;
 import com.booking.exception.NotFoundException;
-import com.booking.repository.AddressRepository;
+import com.booking.repository.address.AddressRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

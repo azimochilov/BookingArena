@@ -1,4 +1,4 @@
-package com.booking.repository;
+package com.booking.repository.address;
 
 import com.booking.domain.entities.address.Address;
 import org.springframework.data.jpa.repository.JpaRepository;

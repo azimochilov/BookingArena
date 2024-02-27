@@ -5,7 +5,7 @@ import com.booking.domain.entities.user.Privilege;
 import com.booking.domain.entities.user.Role;
 import com.booking.domain.entities.user.RolePrivilege;
 import com.booking.domain.entities.user.User;
-import com.booking.repository.UserRepository;
+import com.booking.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

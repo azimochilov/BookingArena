@@ -1,4 +1,4 @@
-package com.booking.repository;
+package com.booking.repository.privilege;
 
 import com.booking.domain.entities.user.Privilege;
 import org.springframework.data.jpa.repository.JpaRepository;

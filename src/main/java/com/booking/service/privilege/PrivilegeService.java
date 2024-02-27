@@ -4,7 +4,7 @@ import com.booking.domain.dtos.privileges.PrivilegeCreationDto;
 import com.booking.domain.dtos.privileges.PrivilegeResultDto;
 import com.booking.domain.entities.user.Privilege;
 import com.booking.exception.NotFoundException;
-import com.booking.repository.PrivilegeRepository;
+import com.booking.repository.privilege.PrivilegeRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

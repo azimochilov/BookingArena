@@ -8,7 +8,7 @@ import java.util.Optional;
 public class ArenaInfoServiceImpl implements ArenaInfoService{
     @Override
     public Optional<ArenaInfoResultDto> getById(Long id) {
-        return Optional.empty();
+        return null;
     }
 
     @Override

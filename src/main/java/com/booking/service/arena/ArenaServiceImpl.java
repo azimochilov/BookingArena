@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class ArenaServiceImpl implements ArenaService{
+
     @Override
     public Optional<ArenaResultDto> getById(Long id) {
-        return Optional.empty();
+        return null;
     }
 
     @Override
