@@ -1,22 +1,59 @@
 package com.booking.service.arena;
 
+import com.booking.domain.dtos.arena.ArenaCreationDto;
 import com.booking.domain.dtos.arena.ArenaResultDto;
 import com.booking.domain.dtos.filter.FiltersDto;
+import com.booking.domain.dtos.users.UserResultDto;
+import com.booking.domain.entities.address.Address;
+import com.booking.domain.entities.arena.Arena;
+import com.booking.domain.entities.arena.ArenaInfo;
+import com.booking.domain.entities.user.User;
+import com.booking.exception.NotFoundException;
+import com.booking.repository.arena.ArenaRepository;
+import com.booking.repository.user.UserRepository;
+import com.booking.service.arena.info.ArenaInfoService;
+import com.booking.service.filesystem.ImageService;
+import com.booking.utils.SecurityUtils;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Slf4j
+@RequiredArgsConstructor
+@Service
+@Transactional
 public class ArenaServiceImpl implements ArenaService{
-
+    private final ArenaRepository arenaRepository;
+    private final ArenaInfoService arenaInfoService;
+    private final UserRepository userRepository;
+    private final ImageService imageService;
+    private final ModelMapper modelMapper;
     @Override
-    public Optional<ArenaResultDto> getById(Long id) {
-        return null;
+    public ArenaResultDto getById(Long id) {
+
+        Arena arena = arenaRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException("not found with given id")
+        );
+
+        return modelMapper.map(arena,ArenaResultDto.class);
     }
 
     @Override
     public List<ArenaResultDto> getAll() {
-        return null;
+        List<Arena> arenas = arenaRepository.findAll();
+        List<ArenaResultDto> arenaResultDTOs = arenas.stream()
+                .map(arena -> modelMapper.map(arena, ArenaResultDto.class))
+                .collect(Collectors.toList());
+        return arenaResultDTOs;
+
     }
 
     @Override
@@ -25,17 +62,39 @@ public class ArenaServiceImpl implements ArenaService{
     }
 
     @Override
-    public Optional<ArenaResultDto> create(String arenaDto, MultipartFile file) {
-        return Optional.empty();
+    public ArenaResultDto create(ArenaCreationDto arenaCreationDto, MultipartFile file) {
+
+        Arena arena = new Arena();
+        arena.setArenaInfo(modelMapper.map(arenaCreationDto.getArenaInfo(), ArenaInfo.class));
+        arena.getArenaInfo().setAddress(modelMapper.map(arenaCreationDto.getArenaInfo().getAddress(), Address.class));
+        arena.setName(arenaCreationDto.getName());
+        arena.setDescription(arenaCreationDto.getDescription());
+        arena.setStatus(true);
+
+        User user = userRepository.findById(Objects.requireNonNull(SecurityUtils.getCurrentUserId())).orElseThrow(
+                () -> new NotFoundException("User is Not valid")
+        );
+        arena.setUser(user);
+
+        ArenaInfo arenaInfo = arena.getArenaInfo();
+        arenaInfoService.create(arenaInfo);
+
+        arenaRepository.save(arena);
+
+        ArenaResultDto arenaResultDto = modelMapper.map(arenaCreationDto,ArenaResultDto.class);
+        return  arenaResultDto;
     }
 
     @Override
-    public Optional<ArenaResultDto> update(Long id, String arenaDto, MultipartFile file) {
-        return Optional.empty();
+    public ArenaResultDto update(Long id, ArenaCreationDto arenaCreationDto, MultipartFile file) {
+        return null;
     }
 
     @Override
     public void delete(Long id) {
-
+        Arena arena = arenaRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("not found with given id")
+        );
+        arenaRepository.delete(arena);
     }
 }

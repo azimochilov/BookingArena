@@ -29,10 +29,18 @@ public class AddressService implements IAddressService{
         return modelMapper.map(address, AddressResultDto.class);
     }
 
+
+
     @Override
     public Address createForUser(AddressCreationDto addressCreationDto) {
         Address address = modelMapper.map(addressCreationDto,Address.class);
         return addressRepository.save(address);
+    }
+
+    @Override
+    public Address createForArena(Address address) {
+        addressRepository.save(address);
+        return address;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.booking.mapper;
 
 import com.booking.domain.dtos.privileges.PrivilegeCreationDto;
 import com.booking.domain.dtos.privileges.PrivilegeResultDto;
+import com.booking.domain.dtos.privileges.PrivilegeUpdateDto;
 import com.booking.domain.entities.user.Privilege;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -17,4 +18,5 @@ public interface PrivilegeMapper {
     PrivilegeResultDto privilegeToPrivilegeResult(Privilege privilege);
 
     List<PrivilegeResultDto> privilegesToResultPrivileges(List<Privilege> privileges);
+
 }

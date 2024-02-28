@@ -8,6 +8,7 @@ import com.booking.domain.entities.address.Address;
 public interface IAddressService {
     AddressResultDto create(AddressCreationDto addressDto);
     Address createForUser(AddressCreationDto addressCreationDto);
+    Address createForArena(Address address);
     AddressResultDto update(Long id, AddressUpdateDto addressDto);
     AddressResultDto getById(Long id);
     AddressResultDto getByName(String name);
