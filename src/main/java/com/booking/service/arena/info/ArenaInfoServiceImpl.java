@@ -9,6 +9,7 @@ import com.booking.domain.entities.arena.ArenaInfo;
 import com.booking.exception.NotFoundException;
 import com.booking.repository.arena.ArenaInfoRepository;
 import com.booking.service.address.AddressService;
+import com.booking.utils.TimeMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,9 +49,11 @@ public class ArenaInfoServiceImpl implements ArenaInfoService{
     @Override
     public ArenaInfoResultDto createWithDto(ArenaInfoCreationDto arenaInfoCreationDto) {
         addressService.create(arenaInfoCreationDto.getAddress());
-        arenaInfoCreationDto.setCreatedAt(Instant.now());
+
 
         ArenaInfo arenaInfo = modelMapper.map(arenaInfoCreationDto,ArenaInfo.class);
+        arenaInfo.setCreatedAt(Instant.now());
+
         arenaInfoRepository.save(arenaInfo);
 
         return modelMapper.map(arenaInfoCreationDto, ArenaInfoResultDto.class);

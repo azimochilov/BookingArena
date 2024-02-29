@@ -19,7 +19,7 @@ public class BookingController {
 
     private final BookingService bookingService;
 
-    @PostMapping("/book")
+    @PostMapping
     public ResponseEntity<ReservationArenaResultDto> bookArena(@RequestBody ReservationArenaCreationDto reservationArenaCreationDto) {
         ReservationArenaResultDto result = bookingService.bookArena(reservationArenaCreationDto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);

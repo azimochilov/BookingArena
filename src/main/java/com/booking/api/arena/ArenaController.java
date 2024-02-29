@@ -34,9 +34,8 @@ public class ArenaController {
     }
 
     @PostMapping
-    public ResponseEntity<ArenaResultDto> createArena(@RequestBody ArenaCreationDto arenaCreationDto,
-                                                      @RequestParam("file") MultipartFile file) {
-        ArenaResultDto arenaResultDto = arenaService.create(arenaCreationDto, file);
+    public ResponseEntity<ArenaResultDto> createArena(@RequestBody ArenaCreationDto arenaCreationDto) {
+        ArenaResultDto arenaResultDto = arenaService.create(arenaCreationDto);
         return new ResponseEntity<>(arenaResultDto, HttpStatus.CREATED);
     }
 

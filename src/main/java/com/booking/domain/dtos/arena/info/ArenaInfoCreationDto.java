@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalTime;
 
 @Builder
 @Data
@@ -15,9 +16,7 @@ import java.time.Instant;
 public class ArenaInfoCreationDto {
     private String phone;
     private Integer price;
-    private Instant workedFrom;
-    private Instant workedTo;
-    private Instant createdAt;
-    private Instant updatedAt;
+    private LocalTime workedFrom;
+    private LocalTime workedTo;
     private AddressCreationDto address;
 }

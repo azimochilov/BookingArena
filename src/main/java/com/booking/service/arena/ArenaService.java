@@ -13,7 +13,7 @@ public interface ArenaService {
     ArenaResultDto getById(Long id);
     List<ArenaResultDto> getAll();
     List<ArenaResultDto> getByFilter(FiltersDto filters);
-    ArenaResultDto create(ArenaCreationDto arenaCreationDto, MultipartFile file);
+    ArenaResultDto create(ArenaCreationDto arenaCreationDto);
     ArenaResultDto update(Long id, ArenaUpdateDto arenaDto, MultipartFile file);
     void delete(Long id);
 }

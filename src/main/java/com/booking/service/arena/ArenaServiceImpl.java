@@ -16,6 +16,7 @@ import com.booking.repository.user.UserRepository;
 import com.booking.service.arena.info.ArenaInfoService;
 import com.booking.service.filesystem.ImageService;
 import com.booking.utils.SecurityUtils;
+import com.booking.utils.TimeMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +65,8 @@ public class ArenaServiceImpl implements ArenaService{
     }
 
     @Override
-    public ArenaResultDto create(ArenaCreationDto arenaCreationDto, MultipartFile file) {
+    public ArenaResultDto create(ArenaCreationDto arenaCreationDto) {
+
 
         Arena arena = new Arena();
         arena.setArenaInfo(modelMapper.map(arenaCreationDto.getArenaInfo(), ArenaInfo.class));
@@ -79,6 +81,8 @@ public class ArenaServiceImpl implements ArenaService{
         arena.setUser(user);
 
         ArenaInfo arenaInfo = arena.getArenaInfo();
+        arenaInfo.setWorkedFrom(TimeMapper.convertLocalTimeToInstant(arenaCreationDto.getArenaInfo().getWorkedFrom()));
+        arenaInfo.setWorkedTo(TimeMapper.convertLocalTimeToInstant(arenaCreationDto.getArenaInfo().getWorkedTo()));
         arenaInfoService.create(arenaInfo);
 
         arenaRepository.save(arena);

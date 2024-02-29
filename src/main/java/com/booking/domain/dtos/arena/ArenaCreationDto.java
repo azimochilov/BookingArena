@@ -17,7 +17,5 @@ public class ArenaCreationDto {
     private String description;
     private boolean status = true;
     private ArenaInfoCreationDto arenaInfo;
-    @JsonIgnore
-    private MultipartFile imageFile;
-    private String image;
+
 }

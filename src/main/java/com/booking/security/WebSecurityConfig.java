@@ -47,6 +47,8 @@ public class WebSecurityConfig {
                                 .requestMatchers("/addresses").permitAll()
                                 .requestMatchers("/privilege").permitAll()
                                 .requestMatchers("/role").permitAll()
+                                .requestMatchers("/api/arenas").permitAll()
+                                .requestMatchers("/api/bookings").permitAll()
                                 .requestMatchers("/role/{id}/privileges").permitAll()
                                 .requestMatchers("/api/v1/users/*/verify").permitAll()
                                 .requestMatchers("/api/v1/users/*/resend").permitAll()
