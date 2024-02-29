@@ -5,7 +5,6 @@ import com.booking.domain.dtos.arena.ArenaResultDto;
 import com.booking.domain.dtos.arena.ArenaUpdateDto;
 import com.booking.domain.dtos.arena.info.ArenaInfoResultDto;
 import com.booking.domain.dtos.filter.FiltersDto;
-import com.booking.domain.dtos.users.UserResultDto;
 import com.booking.domain.entities.address.Address;
 import com.booking.domain.entities.arena.Arena;
 import com.booking.domain.entities.arena.ArenaInfo;
@@ -26,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -83,11 +81,15 @@ public class ArenaServiceImpl implements ArenaService{
         ArenaInfo arenaInfo = arena.getArenaInfo();
         arenaInfo.setWorkedFrom(TimeMapper.convertLocalTimeToInstant(arenaCreationDto.getArenaInfo().getWorkedFrom()));
         arenaInfo.setWorkedTo(TimeMapper.convertLocalTimeToInstant(arenaCreationDto.getArenaInfo().getWorkedTo()));
+        arenaInfo.setArena(arena);
         arenaInfoService.create(arenaInfo);
 
         arenaRepository.save(arena);
 
         ArenaResultDto arenaResultDto = modelMapper.map(arenaCreationDto,ArenaResultDto.class);
+        arenaResultDto.getArenaInfo().setWorkedFrom(arenaCreationDto.getArenaInfo().getWorkedFrom());
+        arenaResultDto.getArenaInfo().setWorkedTo(arenaCreationDto.getArenaInfo().getWorkedTo());
+
         return  arenaResultDto;
     }
 
