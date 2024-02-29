@@ -2,6 +2,7 @@ package com.booking.service.arena;
 
 import com.booking.domain.dtos.arena.ArenaCreationDto;
 import com.booking.domain.dtos.arena.ArenaResultDto;
+import com.booking.domain.dtos.arena.ArenaUpdateDto;
 import com.booking.domain.dtos.filter.FiltersDto;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +14,6 @@ public interface ArenaService {
     List<ArenaResultDto> getAll();
     List<ArenaResultDto> getByFilter(FiltersDto filters);
     ArenaResultDto create(ArenaCreationDto arenaCreationDto, MultipartFile file);
-    ArenaResultDto update(Long id, ArenaCreationDto arenaCreationDto, MultipartFile file);
+    ArenaResultDto update(Long id, ArenaUpdateDto arenaDto, MultipartFile file);
     void delete(Long id);
 }

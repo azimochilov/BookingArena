@@ -2,6 +2,8 @@ package com.booking.service.arena;
 
 import com.booking.domain.dtos.arena.ArenaCreationDto;
 import com.booking.domain.dtos.arena.ArenaResultDto;
+import com.booking.domain.dtos.arena.ArenaUpdateDto;
+import com.booking.domain.dtos.arena.info.ArenaInfoResultDto;
 import com.booking.domain.dtos.filter.FiltersDto;
 import com.booking.domain.dtos.users.UserResultDto;
 import com.booking.domain.entities.address.Address;
@@ -86,8 +88,17 @@ public class ArenaServiceImpl implements ArenaService{
     }
 
     @Override
-    public ArenaResultDto update(Long id, ArenaCreationDto arenaCreationDto, MultipartFile file) {
-        return null;
+    public ArenaResultDto update(Long id, ArenaUpdateDto arenaDto, MultipartFile file) {
+        Arena arena = arenaRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("with given id not found")
+        );
+        arena.setName(arenaDto.getName());
+        arena.setDescription(arenaDto.getDescription());
+
+        ArenaInfoResultDto arenaInfo = arenaInfoService.update(arena.getArenaInfo().getId(), arenaDto.getArenaInfo());
+        arena.setArenaInfo(modelMapper.map(arenaInfo,ArenaInfo.class));
+        arenaRepository.save(arena);
+        return modelMapper.map(arena,ArenaResultDto.class);
     }
 
     @Override
