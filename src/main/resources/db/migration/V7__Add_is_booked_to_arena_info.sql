@@ -1,0 +1,2 @@
+ALTER TABLE arena_info
+    ADD COLUMN is_booked BOOLEAN NOT NULL DEFAULT FALSE;

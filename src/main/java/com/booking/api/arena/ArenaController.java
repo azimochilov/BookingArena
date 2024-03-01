@@ -3,7 +3,9 @@ package com.booking.api.arena;
 import com.booking.domain.dtos.arena.ArenaCreationDto;
 import com.booking.domain.dtos.arena.ArenaResultDto;
 import com.booking.domain.dtos.arena.ArenaUpdateDto;
+import com.booking.domain.entities.arena.Arena;
 import com.booking.service.arena.ArenaService;
+import com.booking.service.filter.FilterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.Instant;
 import java.util.List;
 
 @Slf4j
@@ -20,6 +23,7 @@ import java.util.List;
 public class ArenaController {
 
     private final ArenaService arenaService;
+    private final FilterService filterService;
 
     @GetMapping("/{id}")
     public ResponseEntity<ArenaResultDto> getArenaById(@PathVariable Long id) {
@@ -45,6 +49,15 @@ public class ArenaController {
                                                       @RequestParam("file") MultipartFile file) {
         ArenaResultDto updatedArena = arenaService.update(id, arenaDto, file);
         return ResponseEntity.ok(updatedArena);
+    }
+    @GetMapping("/available")
+    public ResponseEntity<List<Arena>> getAvailableArenas(
+            @RequestParam Instant from,
+            @RequestParam Instant to,
+            @RequestParam double userLat,
+            @RequestParam double userLon) {
+        List<Arena> availableAndSortedArenas = filterService.findAvailableAndSortedArenas(from, to, userLat, userLon);
+        return ResponseEntity.ok(availableAndSortedArenas);
     }
 
     @DeleteMapping("/{id}")

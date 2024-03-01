@@ -31,7 +31,8 @@ public class ArenaInfo {
     private Instant createdAt;
     @Column(name = "updated_at")
     private Instant updatedAt;
-
+    @Column(name = "is_booked")
+    private boolean isBooked;
     @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;

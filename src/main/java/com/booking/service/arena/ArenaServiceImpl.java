@@ -58,11 +58,6 @@ public class ArenaServiceImpl implements ArenaService{
     }
 
     @Override
-    public List<ArenaResultDto> getByFilter(FiltersDto filters) {
-        return null;
-    }
-
-    @Override
     public ArenaResultDto create(ArenaCreationDto arenaCreationDto) {
 
 

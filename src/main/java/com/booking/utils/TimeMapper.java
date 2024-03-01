@@ -12,7 +12,6 @@ public  class  TimeMapper {
         LocalDate currentDate = LocalDate.now(tashkentZoneId);
 
         ZoneOffset currentOffsetForTashkent = tashkentZoneId.getRules().getOffset(Instant.now());
-
         return currentDate.atTime(adjustedTime).toInstant(currentOffsetForTashkent);
     }
 }
