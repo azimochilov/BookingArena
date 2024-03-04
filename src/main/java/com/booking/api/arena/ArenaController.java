@@ -3,6 +3,7 @@ package com.booking.api.arena;
 import com.booking.domain.dtos.arena.ArenaCreationDto;
 import com.booking.domain.dtos.arena.ArenaResultDto;
 import com.booking.domain.dtos.arena.ArenaUpdateDto;
+import com.booking.domain.dtos.filter.FiltersDto;
 import com.booking.domain.entities.arena.Arena;
 import com.booking.service.arena.ArenaService;
 import com.booking.service.filter.FilterService;
@@ -51,12 +52,8 @@ public class ArenaController {
         return ResponseEntity.ok(updatedArena);
     }
     @GetMapping("/available")
-    public ResponseEntity<List<Arena>> getAvailableArenas(
-            @RequestParam Instant from,
-            @RequestParam Instant to,
-            @RequestParam double userLat,
-            @RequestParam double userLon) {
-        List<Arena> availableAndSortedArenas = filterService.findAvailableAndSortedArenas(from, to, userLat, userLon);
+    public ResponseEntity<List<ArenaResultDto>> getAvailableArenas(FiltersDto filtersDto) {
+        List<ArenaResultDto> availableAndSortedArenas = filterService.getByFilter(filtersDto);
         return ResponseEntity.ok(availableAndSortedArenas);
     }
 
