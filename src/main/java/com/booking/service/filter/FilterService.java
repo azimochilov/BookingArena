@@ -43,7 +43,6 @@ public class FilterService {
             arenas = getSortedByDistance(arenas, filters.getLongitude(), filters.getLatitude());
         }
 
-        // Manually map each Arena to ArenaResultDto and collect into a list
         List<ArenaResultDto> resultDtos = new ArrayList<>();
         for (Arena arena : arenas) {
             ArenaResultDto dto = modelMapper.map(arena, ArenaResultDto.class);

@@ -61,7 +61,7 @@ public class BookingServiceImpl implements BookingService{
         }
 
         int totalPrice = arena.getArenaInfo().getPrice() * reservationTime;
-        reservationArena.setTotalPrice(totalPrice);
+        reservationArena.setTotalPrice(Math.abs(totalPrice));
 
         Long userId = SecurityUtils.getCurrentUserId();
         User user  = userRepository.findById(userId).orElseThrow(

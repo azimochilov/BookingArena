@@ -38,12 +38,4 @@ public class ProjectConfig {
         return new ModelMapper();
     }
 
-//    @Bean
-//    static FilterRegistrationBean<Filter> handlerMappingIntrospectorCacheFilter(HandlerMappingIntrospector hmi) {
-//        Filter cacheFilter = hmi.createCacheFilter();
-//        FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>(cacheFilter);
-//        registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-//        registrationBean.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
-//        return registrationBean;
-//    }
 }

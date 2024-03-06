@@ -4,12 +4,10 @@ import com.booking.domain.dtos.addresses.AddressResultDto;
 import com.booking.domain.dtos.arena.info.ArenaInfoCreationDto;
 import com.booking.domain.dtos.arena.info.ArenaInfoResultDto;
 import com.booking.domain.dtos.arena.info.ArenaInfoUpdateDto;
-import com.booking.domain.entities.address.Address;
 import com.booking.domain.entities.arena.ArenaInfo;
 import com.booking.exception.NotFoundException;
 import com.booking.repository.arena.ArenaInfoRepository;
-import com.booking.service.address.AddressService;
-import com.booking.utils.TimeMapper;
+import com.booking.service.AddressService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +15,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -46,18 +43,21 @@ public class ArenaInfoServiceImpl implements ArenaInfoService{
         return modelMapper.map(arenaInfo,ArenaInfoResultDto.class);
     }
 
-    @Override
     public ArenaInfoResultDto createWithDto(ArenaInfoCreationDto arenaInfoCreationDto) {
-        addressService.create(arenaInfoCreationDto.getAddress());
-
-
-        ArenaInfo arenaInfo = modelMapper.map(arenaInfoCreationDto,ArenaInfo.class);
+        // Assuming AddressService.create(...) handles the address part correctly
+        AddressResultDto addressResult = addressService.create(arenaInfoCreationDto.getAddress());
+        // Map the creation DTO to entity
+        ArenaInfo arenaInfo = modelMapper.map(arenaInfoCreationDto, ArenaInfo.class);
+        // Set additional properties as necessary
         arenaInfo.setCreatedAt(Instant.now());
-
-        arenaInfoRepository.save(arenaInfo);
-
-        return modelMapper.map(arenaInfoCreationDto, ArenaInfoResultDto.class);
+        // Save the entity
+        arenaInfo = arenaInfoRepository.save(arenaInfo);
+        // Map the saved entity to result DTO
+        ArenaInfoResultDto resultDto = modelMapper.map(arenaInfo, ArenaInfoResultDto.class);
+        // Return the mapped result DTO
+        return resultDto;
     }
+
 
     @Override
     public ArenaInfoResultDto update(Long id, ArenaInfoUpdateDto arenaInfoUpdateDto) {

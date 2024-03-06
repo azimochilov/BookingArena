@@ -4,13 +4,11 @@ package com.booking.api.address;
 import com.booking.domain.dtos.addresses.AddressCreationDto;
 import com.booking.domain.dtos.addresses.AddressResultDto;
 import com.booking.domain.dtos.addresses.AddressUpdateDto;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import com.booking.service.address.AddressService;
-import java.util.List;
+import com.booking.service.AddressService;
 
 @RestController
 @RequestMapping("/addresses")
