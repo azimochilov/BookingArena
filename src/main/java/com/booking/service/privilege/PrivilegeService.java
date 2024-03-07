@@ -25,9 +25,10 @@ public class PrivilegeService implements IPrivilegeServicec{
     @Override
     public PrivilegeResultDto create(PrivilegeCreationDto privilegeDto) {
         Privilege privilege = modelMapper.map(privilegeDto, Privilege.class);
-        privilegeRepository.save(privilege);
-        return modelMapper.map(privilegeDto, PrivilegeResultDto.class);
+        Privilege savedPrivilege = privilegeRepository.save(privilege);
+        return modelMapper.map(savedPrivilege, PrivilegeResultDto.class);
     }
+
 
     @Override
     public PrivilegeResultDto getById(Long id) {
@@ -40,17 +41,17 @@ public class PrivilegeService implements IPrivilegeServicec{
     }
 
     @Override
-    public PrivilegeResultDto update(Long id, PrivilegeCreationDto privilegeDto)
-    {
+    public PrivilegeResultDto update(Long id, PrivilegeCreationDto privilegeDto) {
         Privilege privilege = privilegeRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Not found privilege with id: " + id));
 
         privilege.setName(privilegeDto.getName());
         privilege.setUpdatedAt(Instant.now());
 
-        privilegeRepository.save(privilege);
+        Privilege updatedPrivilege = privilegeRepository.save(privilege);
 
-        return modelMapper.map(privilegeDto, PrivilegeResultDto.class);
+        // Map from the updated entity, not the creation DTO
+        return modelMapper.map(updatedPrivilege, PrivilegeResultDto.class);
     }
 
     @Override

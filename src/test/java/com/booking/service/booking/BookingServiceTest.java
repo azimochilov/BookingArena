@@ -1,4 +1,4 @@
-package com.booking.service.address.booking;
+package com.booking.service.booking;
 
 import com.booking.domain.dtos.booking.ReservationArenaCreationDto;
 import com.booking.domain.dtos.booking.ReservationArenaResultDto;
@@ -64,7 +64,6 @@ public class BookingServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Initialize user
         user = new User();
         user.setUserId(1L);
         user.setUsername("testUser");
@@ -122,7 +121,6 @@ public class BookingServiceTest {
         Exception exception = assertThrows(NotFoundException.class, () -> bookingService.bookArena(reservationArenaCreationDto));
 
         assertEquals("not found with given id", exception.getMessage());
-        // Verify that no booking attempt is made if the arena is not found
         verifyNoInteractions(bookingRepository);
     }
 

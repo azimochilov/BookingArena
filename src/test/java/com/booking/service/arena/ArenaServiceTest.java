@@ -1,4 +1,4 @@
-package com.booking.service.address.arena;
+package com.booking.service.arena;
 
 import com.booking.domain.dtos.addresses.AddressCreationDto;
 import com.booking.domain.dtos.arena.ArenaCreationDto;
@@ -69,7 +69,6 @@ public class ArenaServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Mock setup for user, arenaInfo, and their DTOs
         user = new User();
         addressCreationDto = new AddressCreationDto();
         user.setUserId(1L);
@@ -78,15 +77,14 @@ public class ArenaServiceTest {
         arenaInfoUpdateDto = ArenaInfoUpdateDto.builder().phone("987654321").price(200).build();
 
         ArenaInfo mockedArenaInfo = ArenaInfo.builder()
-                .id(1L) // Assuming an ID for illustration
+                .id(1L)
                 .phone("123456789")
                 .price(100)
-                .address(new Address()) // Set a non-null Address here
+                .address(new Address())
                 .workedFrom(Instant.now())
                 .workedTo(Instant.now())
                 .build();
 
-        // Stub the modelMapper to return the mockedArenaInfo when mapping from ArenaCreationDto to ArenaInfo
         when(modelMapper.map(any(ArenaInfoCreationDto.class), eq(ArenaInfo.class))).thenReturn(mockedArenaInfo);
 
         arenaCreationDto = ArenaCreationDto.builder()
@@ -119,8 +117,8 @@ public class ArenaServiceTest {
                 .image("image.jpg")
                 .build();
 
-        LocalTime workedFrom = LocalTime.of(9, 0); // Example start time
-        LocalTime workedTo = LocalTime.of(17, 0); // Example end time
+        LocalTime workedFrom = LocalTime.of(9, 0);
+        LocalTime workedTo = LocalTime.of(17, 0);
 
         AddressCreationDto addressCreationDto = new AddressCreationDto("Street", "City", 0.0, 0.0);
         ArenaInfoCreationDto arenaInfoCreationDto = ArenaInfoCreationDto.builder()
@@ -138,7 +136,6 @@ public class ArenaServiceTest {
                 .arenaInfo(arenaInfoCreationDto)
                 .build();
 
-        // Mock behavior of modelMapper for all mappings
         when(modelMapper.map(any(ArenaInfoCreationDto.class), eq(ArenaInfo.class))).thenReturn(new ArenaInfo());
         when(modelMapper.map(any(AddressCreationDto.class), eq(Address.class))).thenReturn(new Address());
         when(modelMapper.map(any(ArenaCreationDto.class), eq(Arena.class))).thenReturn(arena);
@@ -231,6 +228,4 @@ public class ArenaServiceTest {
 
         assertThrows(NotFoundException.class, () -> arenaService.delete(1L));
     }
-
-
 }

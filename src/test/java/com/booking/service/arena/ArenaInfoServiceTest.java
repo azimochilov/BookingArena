@@ -1,4 +1,4 @@
-package com.booking.service.address.arena;
+package com.booking.service.arena;
 
 import com.booking.domain.dtos.addresses.AddressCreationDto;
 import com.booking.domain.dtos.addresses.AddressResultDto;
@@ -51,7 +51,6 @@ public class ArenaInfoServiceTest {
 
     @BeforeEach
     public void setUp() {
-        // Sample initialization of objects with hypothetical values
         addressCreationDto = new AddressCreationDto("Street 1", "City A", 10.0, 20.0);
         addressResultDto = new AddressResultDto("Street 1", "City A", 10.0, 20.0);
 
@@ -112,36 +111,28 @@ public class ArenaInfoServiceTest {
 
     @Test
     public void whenUpdate_thenSuccess() {
-        // Ensure your arenaInfo's ID and updated values are set correctly for the test
         Long arenaInfoId = 1L;
         arenaInfo.setPhone(arenaInfoUpdateDto.getPhone());
         arenaInfo.setPrice(arenaInfoUpdateDto.getPrice());
 
-        // Assuming the address ID needs to be correctly fetched and updated
         Long addressId = arenaInfo.getAddress().getAddressId();
 
-        // Mock the findById to return the pre-existing arenaInfo
         when(arenaInfoRepository.findById(arenaInfoId)).thenReturn(Optional.of(arenaInfo));
 
-        // Stub the address update to reflect changes made by the update operation
         AddressUpdateDto updateDto = arenaInfoUpdateDto.getAddress();
         AddressResultDto updatedAddressResultDto = new AddressResultDto(
                 updateDto.getStreet(), updateDto.getCity(), updateDto.getLongitude(), updateDto.getLatitude()
         );
         when(addressService.update(eq(addressId), eq(updateDto))).thenReturn(updatedAddressResultDto);
 
-        // Ensure the repository.save returns an updated entity (simplified here for clarity)
         when(arenaInfoRepository.save(any(ArenaInfo.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        // Execute the update operation
         ArenaInfoResultDto result = arenaInfoService.update(1L, arenaInfoUpdateDto);
 
-        // Validate the update operation results
         assertNotNull(result);
         assertEquals(arenaInfoUpdateDto.getPhone(), result.getPhone());
         assertEquals(arenaInfoUpdateDto.getPrice(), result.getPrice());
 
-        // Verify interactions
         verify(arenaInfoRepository).findById(arenaInfoId);
         verify(addressService).update(eq(addressId), eq(updateDto));
         verify(arenaInfoRepository).save(any(ArenaInfo.class));

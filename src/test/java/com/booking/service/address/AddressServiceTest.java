@@ -30,7 +30,6 @@ public class AddressServiceTest {
     @InjectMocks
     private AddressService addressService;
 
-    // Sample data for testing
     private AddressCreationDto addressCreationDto;
     private AddressUpdateDto addressUpdateDto;
     private Address address;
