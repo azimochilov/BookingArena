@@ -30,7 +30,7 @@ public class BookingControllerTest {
                 .configureClient()
                 .baseUrl("http://localhost:8081/api/bookings")
                 .build();
-        reservationArenaCreationDto = new ReservationArenaCreationDto(/* parameters matching your constructor */);
+        reservationArenaCreationDto = new ReservationArenaCreationDto();
     }
 
 

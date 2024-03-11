@@ -40,7 +40,7 @@ public class UserControllerTest {
 
         userCreationDto = new UserCreationDto();
         userUpdateDto = new UserUpdateDto();
-        verifyDto = new VerifyDto("verificationCode");
+        verifyDto = new VerifyDto();
     }
 
     @Test
@@ -69,7 +69,7 @@ public class UserControllerTest {
     @Test
     @Order(3)
     void verifyUser_ReturnStatusOkOrBadRequest() {
-        Long userId = 1L; // Assumed user ID
+        Long userId = 1L;
         client.post().uri("/{id}/verify", userId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(verifyDto), VerifyDto.class)
