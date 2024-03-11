@@ -10,37 +10,37 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.booking.service.AddressService;
 
-@RestController
-@RequestMapping("/addresses")
-@PreAuthorize("hasAuthority('ADDRESS_SERVICE')")
-@RequiredArgsConstructor
-public class AddressController {
-    private final AddressService addressService;
+    @RestController
+    @RequestMapping("/addresses")
+    @PreAuthorize("hasAuthority('ADDRESS_SERVICE')")
+    @RequiredArgsConstructor
+    public class AddressController {
+        private final AddressService addressService;
 
-    @PostMapping
-    public ResponseEntity create(@RequestBody AddressCreationDto addressCreationDto){
-        var address = addressService.create(addressCreationDto);
-        return ResponseEntity.ok(address);
+        @PostMapping
+        public ResponseEntity create(@RequestBody AddressCreationDto addressCreationDto){
+            var address = addressService.create(addressCreationDto);
+            return ResponseEntity.ok(address);
+        }
+
+        @DeleteMapping("/{id}")
+        public ResponseEntity delete(@PathVariable Long id){
+            addressService.delete(id);
+            return ResponseEntity.noContent().build();
+        }
+
+
+        @GetMapping("/{id}")
+        public ResponseEntity<?> getById(@PathVariable Long id) {
+            AddressResultDto address = addressService.getById(id);
+
+            return ResponseEntity.ok(address);
+        }
+        @PreAuthorize("hasAuthority('UPDATE_USER')")
+        @PutMapping("/{id}")
+        public ResponseEntity update(@PathVariable Long id,@RequestBody AddressUpdateDto addressUpdateDto){
+            AddressResultDto updatedAddress = addressService.update(id,addressUpdateDto);
+            return ResponseEntity.ok(updatedAddress);
+        }
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id){
-        addressService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id) {
-        AddressResultDto address = addressService.getById(id);
-
-        return ResponseEntity.ok(address);
-    }
-    @PreAuthorize("hasAuthority('UPDATE_USER')")
-    @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable Long id,@RequestBody AddressUpdateDto addressUpdateDto){
-        AddressResultDto updatedAddress = addressService.update(id,addressUpdateDto);
-        return ResponseEntity.ok(updatedAddress);
-    }
-}
 

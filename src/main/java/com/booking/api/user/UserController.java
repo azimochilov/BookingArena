@@ -22,10 +22,7 @@ public class UserController {
         return ResponseEntity.ok(userService.create(user));
     }
 
-//    private Boolean checkPasswordLength(String password){
-//
-//        return (password.length()>4);
-//    }
+
 
     @PatchMapping("/{id}")
     public ResponseEntity<UserUpdateDto> updateUser(@PathVariable Long id, @RequestBody UserUpdateDto userDto) {

@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface ArenaService {
     ArenaResultDto getById(Long id);
     List<ArenaResultDto> getAll();
-
     ArenaResultDto create(ArenaCreationDto arenaCreationDto);
     ArenaResultDto update(Long id, ArenaUpdateDto arenaDto, MultipartFile file);
     void delete(Long id);
