@@ -65,7 +65,7 @@ public class BookingServiceImpl implements BookingService{
 
         Long userId = SecurityUtils.getCurrentUserId();
         User user  = userRepository.findById(userId).orElseThrow(
-                () -> new NotFoundException("couldnot fetch the user from the token")
+                () -> new NotFoundException("couldnot fetch the user from the given token")
         );
 
         Booking booking = new Booking();

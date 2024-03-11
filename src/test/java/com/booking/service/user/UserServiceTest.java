@@ -12,7 +12,7 @@ import com.booking.domain.entities.user.User;
 import com.booking.exception.NotFoundException;
 import com.booking.repository.role.RoleRepository;
 import com.booking.repository.user.UserRepository;
-import com.booking.service.AddressService;
+import com.booking.service.address.AddressService;
 import com.booking.service.email.EmailService;
 import com.booking.service.email.EmailVerificationService;
 import org.junit.jupiter.api.BeforeEach;

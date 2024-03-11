@@ -1,4 +1,4 @@
-package com.booking.service;
+package com.booking.service.address;
 
 import com.booking.domain.dtos.addresses.AddressCreationDto;
 import com.booking.domain.dtos.addresses.AddressResultDto;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
-public class AddressService implements IAddressService{
+public class AddressService implements IAddressService {
 
     private final AddressRepository addressRepository;
     private final ModelMapper modelMapper;

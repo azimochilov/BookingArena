@@ -7,7 +7,7 @@ import com.booking.domain.dtos.arena.info.ArenaInfoUpdateDto;
 import com.booking.domain.entities.arena.ArenaInfo;
 import com.booking.exception.NotFoundException;
 import com.booking.repository.arena.ArenaInfoRepository;
-import com.booking.service.AddressService;
+import com.booking.service.address.AddressService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,17 +44,11 @@ public class ArenaInfoServiceImpl implements ArenaInfoService{
     }
 
     public ArenaInfoResultDto createWithDto(ArenaInfoCreationDto arenaInfoCreationDto) {
-        // Assuming AddressService.create(...) handles the address part correctly
         AddressResultDto addressResult = addressService.create(arenaInfoCreationDto.getAddress());
-        // Map the creation DTO to entity
         ArenaInfo arenaInfo = modelMapper.map(arenaInfoCreationDto, ArenaInfo.class);
-        // Set additional properties as necessary
         arenaInfo.setCreatedAt(Instant.now());
-        // Save the entity
         arenaInfo = arenaInfoRepository.save(arenaInfo);
-        // Map the saved entity to result DTO
         ArenaInfoResultDto resultDto = modelMapper.map(arenaInfo, ArenaInfoResultDto.class);
-        // Return the mapped result DTO
         return resultDto;
     }
 

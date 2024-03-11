@@ -6,7 +6,6 @@ import com.booking.domain.dtos.addresses.AddressUpdateDto;
 import com.booking.domain.entities.address.Address;
 import com.booking.exception.NotFoundException;
 import com.booking.repository.address.AddressRepository;
-import com.booking.service.AddressService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

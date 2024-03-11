@@ -50,7 +50,6 @@ public class PrivilegeService implements IPrivilegeServicec{
 
         Privilege updatedPrivilege = privilegeRepository.save(privilege);
 
-        // Map from the updated entity, not the creation DTO
         return modelMapper.map(updatedPrivilege, PrivilegeResultDto.class);
     }
 

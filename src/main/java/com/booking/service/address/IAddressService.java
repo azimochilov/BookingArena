@@ -1,4 +1,4 @@
-package com.booking.service;
+package com.booking.service.address;
 
 import com.booking.domain.dtos.addresses.AddressCreationDto;
 import com.booking.domain.dtos.addresses.AddressResultDto;

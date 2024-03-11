@@ -9,7 +9,7 @@ import com.booking.domain.dtos.arena.info.ArenaInfoUpdateDto;
 import com.booking.domain.entities.address.Address;
 import com.booking.domain.entities.arena.ArenaInfo;
 import com.booking.repository.arena.ArenaInfoRepository;
-import com.booking.service.AddressService;
+import com.booking.service.address.AddressService;
 import com.booking.service.arena.info.ArenaInfoServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
