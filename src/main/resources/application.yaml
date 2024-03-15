@@ -4,6 +4,7 @@ server:
 spring:
   flyway:
     enabled: ${SPRING_FLYWAY_ENABLED}
+    baseline-on-migrate: true
 
   datasource:
     url: ${SPRING_DATASOURCE_URL}
