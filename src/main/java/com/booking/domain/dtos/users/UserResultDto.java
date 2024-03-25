@@ -1,6 +1,5 @@
 package com.booking.domain.dtos.users;
 
-import com.booking.domain.dtos.addresses.AddressResultDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,9 +15,10 @@ public class UserResultDto {
     private String password;
 
     private String email;
-
-    private AddressResultDto addressResultDto;
-
+    private String street;
+    private String city;
+    private Double longitude;
+    private Double latitude;
     private String role;
 
     private boolean isActive;

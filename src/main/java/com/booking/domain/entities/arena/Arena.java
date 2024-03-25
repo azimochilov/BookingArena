@@ -1,6 +1,6 @@
 package com.booking.domain.entities.arena;
 
-import com.booking.domain.entities.booking.ReservationArena;
+import com.booking.domain.entities.booking.Booking;
 import com.booking.domain.entities.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,7 +27,7 @@ public class Arena {
 
     @Column(name = "image")
     private String image;
-
+    @Builder.Default
     @Column(name = "status", columnDefinition = "boolean default true")
     private boolean status = true;
 
@@ -40,5 +40,6 @@ public class Arena {
 
     @Builder.Default
     @OneToMany(mappedBy = "arena", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private List<ReservationArena> reservationArena = new ArrayList<>();
+    private List<Booking> reservationArena = new ArrayList<>();
+
 }

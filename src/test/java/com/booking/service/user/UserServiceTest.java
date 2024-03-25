@@ -6,7 +6,6 @@ import com.booking.domain.dtos.addresses.AddressUpdateDto;
 import com.booking.domain.dtos.users.UserCreationDto;
 import com.booking.domain.dtos.users.UserResultDto;
 import com.booking.domain.dtos.users.UserUpdateDto;
-import com.booking.domain.entities.address.Address;
 import com.booking.domain.entities.user.Role;
 import com.booking.domain.entities.user.User;
 import com.booking.exception.NotFoundException;

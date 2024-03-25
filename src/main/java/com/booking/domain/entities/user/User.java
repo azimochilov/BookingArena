@@ -1,7 +1,6 @@
 package com.booking.domain.entities.user;
 
 
-import com.booking.domain.entities.address.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,10 +29,17 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @OneToOne
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
+    @Column(name = "street")
+    private String street;
 
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
+    @Column(name = "latitude")
+    private Double latitude;
     @ManyToOne
     @JoinColumn(name = "role_id" , referencedColumnName = "id")
     private Role role;

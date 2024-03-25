@@ -1,0 +1,4 @@
+
+ALTER TABLE arena_info DROP COLUMN IF EXISTS address_id;
+
+ALTER TABLE users DROP COLUMN IF EXISTS address_id;

@@ -6,7 +6,6 @@ import com.booking.domain.dtos.addresses.AddressUpdateDto;
 import com.booking.domain.dtos.arena.info.ArenaInfoCreationDto;
 import com.booking.domain.dtos.arena.info.ArenaInfoResultDto;
 import com.booking.domain.dtos.arena.info.ArenaInfoUpdateDto;
-import com.booking.domain.entities.address.Address;
 import com.booking.domain.entities.arena.ArenaInfo;
 import com.booking.repository.arena.ArenaInfoRepository;
 import com.booking.service.address.AddressService;

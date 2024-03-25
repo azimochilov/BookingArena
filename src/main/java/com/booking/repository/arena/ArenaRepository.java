@@ -14,15 +14,24 @@ import java.util.Set;
 @Repository
 public interface ArenaRepository extends JpaRepository<Arena, Long> {
 
-    @Query("select a from Arena a join a.arenaInfo ai join ai.address ad where ad.city = :city")
-    Set<Arena> findByCity(@Param("city") String city);
-
-
-    @Query(value = "SELECT * FROM Arena a WHERE a.id IN :arenaIds AND NOT EXISTS (" +
-            "SELECT ra.arena_id FROM reservation_arena ra WHERE ra.arena_id = a.id AND ra.booking_from < :to AND ra.booking_to > :from)",
-            nativeQuery = true)
-
-    Set<Arena> findAvailableArenasWithinGivenArenas(@Param("arenaIds") List<Long> arenaIds, @Param("from") Instant from, @Param("to") Instant to);
-
-
+//    @Query("select a from Arena a join a.arenaInfo ai join ai.address ad where ad.city = :city")
+//    Set<Arena> findByCity(@Param("city") String city);
+//
+//
+//    @Query(value = "SELECT * FROM Arena a WHERE a.id IN :arenaIds AND NOT EXISTS (" +
+//            "SELECT ra.arena_id FROM reservation_arena ra WHERE ra.arena_id = a.id AND ra.booking_from < :to AND ra.booking_to > :from)",
+//            nativeQuery = true)
+//
+//    Set<Arena> findAvailableArenasWithinGivenArenas(@Param("arenaIds") List<Long> arenaIds, @Param("from") Instant from, @Param("to") Instant to);
+//
+//
+@Query(value = "SELECT a.*, public.calculate_distance(ad.latitude, ad.longitude, :lat, :lng) as distance " +
+        "FROM Arena a " +
+        "JOIN ArenaInfo ai ON a.id = ai.arena_id " +
+        "JOIN Address ad ON ai.address_id = ad.id " +
+        "WHERE (:city IS NULL OR ad.city = :city) " +
+        "AND NOT EXISTS ( " +
+        "SELECT 1 FROM reservation_arena ra WHERE ra.arena_id = a.id AND ra.booking_from < :to AND ra.booking_to > :from) " +
+        "ORDER BY distance ASC", nativeQuery = true)
+List<Arena> findFilteredAndSortedArenas(@Param("city") String city, @Param("lat") Double lat, @Param("lng") Double lng, @Param("from") Instant from, @Param("to") Instant to);
 }

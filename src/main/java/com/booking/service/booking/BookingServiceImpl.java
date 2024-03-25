@@ -1,16 +1,13 @@
 package com.booking.service.booking;
 
-import com.booking.domain.dtos.arena.ArenaResultDto;
 import com.booking.domain.dtos.booking.ReservationArenaCreationDto;
 import com.booking.domain.dtos.booking.ReservationArenaResultDto;
 import com.booking.domain.entities.arena.Arena;
 import com.booking.domain.entities.booking.Booking;
-import com.booking.domain.entities.booking.ReservationArena;
 import com.booking.domain.entities.user.User;
 import com.booking.exception.NotFoundException;
 import com.booking.repository.arena.ArenaRepository;
 import com.booking.repository.booking.BookingRepository;
-import com.booking.repository.booking.ReservationArenaRepository;
 import com.booking.repository.user.UserRepository;
 import com.booking.utils.SecurityUtils;
 import jakarta.transaction.Transactional;
@@ -30,7 +27,6 @@ import java.util.stream.Collectors;
 @Transactional
 public class BookingServiceImpl implements BookingService{
 
-    private final ReservationArenaRepository reservationArenaRepository;
     private final ArenaRepository arenaRepository;
     private final UserRepository userRepository;
     private final BookingRepository bookingRepository;
@@ -41,7 +37,7 @@ public class BookingServiceImpl implements BookingService{
                 () -> new NotFoundException("not found with given id")
         );
 
-        ReservationArena reservationArena = new ReservationArena();
+        Booking reservationArena = new Booking();
         if (getByReservationByTime(arena, reservationArenaCreationDto.getBookingFrom(), reservationArenaCreationDto.getBookingTo())) {
             reservationArena.setArena(arena);
             reservationArena.setBookingTo(reservationArenaCreationDto.getBookingTo());
@@ -69,19 +65,17 @@ public class BookingServiceImpl implements BookingService{
         );
 
         Booking booking = new Booking();
-        booking.setBooking(reservationArena);
         booking.setUser(user);
         booking.setConsumer(SecurityUtils.getCurrentUsername());
         booking.setConsumer(reservationArenaCreationDto.getCostumer());
 
         bookingRepository.save(booking);
-        reservationArenaRepository.save(reservationArena);
         return modelMapper.map(reservationArena, ReservationArenaResultDto.class);
     }
 
     @Override
     public List<ReservationArenaResultDto> getAll() {
-        List<ReservationArena> arenas = reservationArenaRepository.findAll();
+        List<Booking> arenas = bookingRepository.findAll();
         List<ReservationArenaResultDto> reservationArenaResultDTOs = arenas.stream()
                 .map(arena -> modelMapper.map(arena, ReservationArenaResultDto.class))
                 .collect(Collectors.toList());
@@ -91,6 +85,4 @@ public class BookingServiceImpl implements BookingService{
     private boolean getByReservationByTime(Arena arena, Instant from, Instant to) {
         return arena.getReservationArena().stream().noneMatch(a -> a.getBookingFrom().isBefore(to) && a.getBookingTo().isAfter(from));
     }
-
-
 }

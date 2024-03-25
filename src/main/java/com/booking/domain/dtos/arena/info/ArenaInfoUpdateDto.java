@@ -1,7 +1,6 @@
 package com.booking.domain.dtos.arena.info;
 
-import com.booking.domain.dtos.addresses.AddressResultDto;
-import com.booking.domain.dtos.addresses.AddressUpdateDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +19,8 @@ public class ArenaInfoUpdateDto {
     private Instant workedTo;
     private Instant createdAt;
     private Instant updatedAt;
-    private AddressUpdateDto address;
+    private String street;
+    private String city;
+    private Double longitude;
+    private Double latitude;
 }

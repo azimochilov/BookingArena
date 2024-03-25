@@ -1,6 +1,5 @@
 package com.booking.domain.dtos.users;
 
-import com.booking.domain.dtos.addresses.AddressCreationDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,10 @@ public class UserCreationDto {
 
     private String email;
 
-    private AddressCreationDto addressCreationDto;
+    private String street;
+    private String city;
+    private Double longitude;
+    private Double latitude;
 
     private String role;
 

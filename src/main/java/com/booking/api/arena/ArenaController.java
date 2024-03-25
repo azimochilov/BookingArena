@@ -51,11 +51,11 @@ public class ArenaController {
         ArenaResultDto updatedArena = arenaService.update(id, arenaDto, file);
         return ResponseEntity.ok(updatedArena);
     }
-    @GetMapping("/available")
-    public ResponseEntity<List<ArenaResultDto>> getAvailableArenas(FiltersDto filtersDto) {
-        List<ArenaResultDto> availableAndSortedArenas = filterService.getByFilter(filtersDto);
-        return ResponseEntity.ok(availableAndSortedArenas);
-    }
+//    @GetMapping("/available")
+//    public ResponseEntity<List<ArenaResultDto>> getAvailableArenas(FiltersDto filtersDto) {
+//        List<ArenaResultDto> availableAndSortedArenas = filterService.getByFilter(filtersDto);
+//        return ResponseEntity.ok(availableAndSortedArenas);
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteArena(@PathVariable Long id) {

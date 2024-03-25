@@ -4,8 +4,6 @@ import com.booking.domain.dtos.arena.ArenaCreationDto;
 import com.booking.domain.dtos.arena.ArenaResultDto;
 import com.booking.domain.dtos.arena.ArenaUpdateDto;
 import com.booking.domain.dtos.arena.info.ArenaInfoResultDto;
-import com.booking.domain.dtos.filter.FiltersDto;
-import com.booking.domain.entities.address.Address;
 import com.booking.domain.entities.arena.Arena;
 import com.booking.domain.entities.arena.ArenaInfo;
 import com.booking.domain.entities.user.User;
@@ -63,7 +61,6 @@ public class ArenaServiceImpl implements ArenaService{
 
         Arena arena = new Arena();
         arena.setArenaInfo(modelMapper.map(arenaCreationDto.getArenaInfo(), ArenaInfo.class));
-        arena.getArenaInfo().setAddress(modelMapper.map(arenaCreationDto.getArenaInfo().getAddress(), Address.class));
         arena.setName(arenaCreationDto.getName());
         arena.setDescription(arenaCreationDto.getDescription());
         arena.setStatus(true);

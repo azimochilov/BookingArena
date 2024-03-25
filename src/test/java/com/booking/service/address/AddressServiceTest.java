@@ -3,7 +3,6 @@ package com.booking.service.address;
 import com.booking.domain.dtos.addresses.AddressCreationDto;
 import com.booking.domain.dtos.addresses.AddressResultDto;
 import com.booking.domain.dtos.addresses.AddressUpdateDto;
-import com.booking.domain.entities.address.Address;
 import com.booking.exception.NotFoundException;
 import com.booking.repository.address.AddressRepository;
 import org.junit.jupiter.api.BeforeEach;

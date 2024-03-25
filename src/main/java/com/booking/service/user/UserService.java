@@ -1,16 +1,13 @@
 package com.booking.service.user;
 
-import com.booking.domain.dtos.addresses.AddressResultDto;
 import com.booking.domain.dtos.users.UserCreationDto;
 import com.booking.domain.dtos.users.UserResultDto;
 import com.booking.domain.dtos.users.UserUpdateDto;
-import com.booking.domain.entities.address.Address;
 import com.booking.domain.entities.user.Role;
 import com.booking.domain.entities.user.User;
 import com.booking.exception.NotFoundException;
 import com.booking.repository.role.RoleRepository;
 import com.booking.repository.user.UserRepository;
-import com.booking.service.address.AddressService;
 import com.booking.service.email.EmailService;
 import com.booking.service.email.EmailVerificationService;
 import jakarta.transaction.Transactional;
@@ -31,7 +28,6 @@ import java.util.stream.Collectors;
 public class UserService implements IUserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AddressService addressService;
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final EmailVerificationService emailVerificationService;
@@ -45,10 +41,8 @@ public class UserService implements IUserService {
 
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        Address address = addressService.createForUser(userDto.getAddressCreationDto());
 
         User user = modelMapper.map(userDto, User.class);
-        user.setAddress(address);
         user.setRole(role);
         userRepository.save(user);
 
@@ -56,7 +50,6 @@ public class UserService implements IUserService {
         emailService.send(userDto.getEmail(),"Verify Code", emailVerificationService.generateCode());
 
         UserResultDto userResultDto = modelMapper.map(user , UserResultDto.class);
-        userResultDto.setAddressResultDto(modelMapper.map(userDto.getAddressCreationDto(),AddressResultDto.class));
         userResultDto.setRole(role.getName());
 
 
@@ -107,7 +100,6 @@ public class UserService implements IUserService {
         user.setRole(role);
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
-        user.setAddress(modelMapper.map(userDto.getAddressUpdateDto(),Address.class));
         user.setActive(userDto.isActive());
 
         userRepository.save(user);
