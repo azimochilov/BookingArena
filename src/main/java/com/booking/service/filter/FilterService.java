@@ -1,15 +1,23 @@
 package com.booking.service.filter;
 
+import com.booking.domain.dtos.arena.ArenaResultDto;
+import com.booking.domain.dtos.filter.FiltersDto;
+import com.booking.domain.entities.arena.Arena;
+import com.booking.repository.arena.ArenaRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-@Slf4j
-@RequiredArgsConstructor
-@Service
-@Transactional
-public class FilterService {
+import java.util.List;
+import java.util.Set;
+//
+//@Slf4j
+//@RequiredArgsConstructor
+//@Service
+//@Transactional
+//public class FilterService {
 //    private final ArenaRepository arenaRepository;
 //    private final ModelMapper modelMapper;
 //
@@ -72,4 +80,4 @@ public class FilterService {
 //        distance = Math.pow(distance, 2) + Math.pow(height, 2);
 //        return Math.sqrt(distance);
 //    }
-}
+//}

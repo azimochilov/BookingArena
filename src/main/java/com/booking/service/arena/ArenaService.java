@@ -14,5 +14,6 @@ public interface ArenaService {
     List<ArenaResultDto> getAll();
     ArenaResultDto create(ArenaCreationDto arenaCreationDto);
     ArenaResultDto update(Long id, ArenaUpdateDto arenaDto, MultipartFile file);
+    List<ArenaResultDto> getByFilter(FiltersDto filters);
     void delete(Long id);
 }

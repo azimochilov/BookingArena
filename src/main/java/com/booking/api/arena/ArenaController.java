@@ -4,9 +4,8 @@ import com.booking.domain.dtos.arena.ArenaCreationDto;
 import com.booking.domain.dtos.arena.ArenaResultDto;
 import com.booking.domain.dtos.arena.ArenaUpdateDto;
 import com.booking.domain.dtos.filter.FiltersDto;
-import com.booking.domain.entities.arena.Arena;
 import com.booking.service.arena.ArenaService;
-import com.booking.service.filter.FilterService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.Instant;
 import java.util.List;
 
 @Slf4j
@@ -24,7 +22,7 @@ import java.util.List;
 public class ArenaController {
 
     private final ArenaService arenaService;
-    private final FilterService filterService;
+
 
     @GetMapping("/{id}")
     public ResponseEntity<ArenaResultDto> getArenaById(@PathVariable Long id) {
@@ -51,11 +49,11 @@ public class ArenaController {
         ArenaResultDto updatedArena = arenaService.update(id, arenaDto, file);
         return ResponseEntity.ok(updatedArena);
     }
-//    @GetMapping("/available")
-//    public ResponseEntity<List<ArenaResultDto>> getAvailableArenas(FiltersDto filtersDto) {
-//        List<ArenaResultDto> availableAndSortedArenas = filterService.getByFilter(filtersDto);
-//        return ResponseEntity.ok(availableAndSortedArenas);
-//    }
+    @GetMapping("/available")
+    public ResponseEntity<List<ArenaResultDto>> getAvailableArenas(FiltersDto filtersDto) {
+        List<ArenaResultDto> availableAndSortedArenas = arenaService.getByFilter(filtersDto);
+        return ResponseEntity.ok(availableAndSortedArenas);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteArena(@PathVariable Long id) {

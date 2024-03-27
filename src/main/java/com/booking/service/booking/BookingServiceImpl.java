@@ -67,7 +67,6 @@ public class BookingServiceImpl implements BookingService{
         Booking booking = new Booking();
         booking.setUser(user);
         booking.setConsumer(SecurityUtils.getCurrentUsername());
-        booking.setConsumer(reservationArenaCreationDto.getCostumer());
 
         bookingRepository.save(booking);
         return modelMapper.map(reservationArena, ReservationArenaResultDto.class);

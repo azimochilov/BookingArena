@@ -4,6 +4,7 @@ import com.booking.domain.dtos.arena.ArenaCreationDto;
 import com.booking.domain.dtos.arena.ArenaResultDto;
 import com.booking.domain.dtos.arena.ArenaUpdateDto;
 import com.booking.domain.dtos.arena.info.ArenaInfoResultDto;
+import com.booking.domain.dtos.filter.FiltersDto;
 import com.booking.domain.entities.arena.Arena;
 import com.booking.domain.entities.arena.ArenaInfo;
 import com.booking.domain.entities.user.User;
@@ -73,6 +74,9 @@ public class ArenaServiceImpl implements ArenaService{
         ArenaInfo arenaInfo = arena.getArenaInfo();
         arenaInfo.setWorkedFrom(TimeMapper.convertLocalTimeToInstant(arenaCreationDto.getArenaInfo().getWorkedFrom()));
         arenaInfo.setWorkedTo(TimeMapper.convertLocalTimeToInstant(arenaCreationDto.getArenaInfo().getWorkedTo()));
+        arenaInfo.setCity(arenaCreationDto.getArenaInfo().getCity());
+        arenaInfo.setLatitude(arenaCreationDto.getArenaInfo().getLatitude());
+        arenaInfo.setLongitude(arenaCreationDto.getArenaInfo().getLongitude());
         arenaInfo.setArena(arena);
         arenaInfoService.create(arenaInfo);
 
@@ -97,6 +101,14 @@ public class ArenaServiceImpl implements ArenaService{
         arena.setArenaInfo(modelMapper.map(arenaInfo,ArenaInfo.class));
         arenaRepository.save(arena);
         return modelMapper.map(arena,ArenaResultDto.class);
+    }
+
+    public List<ArenaResultDto> getByFilter(FiltersDto filters) {
+        List<Arena> filtiredArenas = arenaRepository.findFilteredAndSortedArenas(filters.getCity(), filters.getLatitude(), filters.getLongitude(), filters.getFrom(), filters.getTo());
+        List<ArenaResultDto> arenaResultDTOs = filtiredArenas.stream()
+                .map(arena -> modelMapper.map(arena, ArenaResultDto.class))
+                .collect(Collectors.toList());
+        return arenaResultDTOs;
     }
 
     @Override
