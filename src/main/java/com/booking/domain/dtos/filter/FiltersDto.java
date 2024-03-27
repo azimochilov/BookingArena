@@ -17,4 +17,5 @@ public class FiltersDto {
     private Double latitude;
     private Instant from;
     private Instant to;
+    private String direction;
 }

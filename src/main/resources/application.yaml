@@ -14,7 +14,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: ${SPRING_JPA_HIBERNATE_DDL-AUTO}
-    show-sql: ${SPRING_JPA_SHOW-SQL}
+    show-sql: ${SPRING_JPA_SHOW_SQL:true}
     database: ${SPRING_JPA_DATABASE}
     database-platform: ${SPRING_JPA_DATABASE-PLATFORM}
 

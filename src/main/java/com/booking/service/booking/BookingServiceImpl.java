@@ -64,11 +64,10 @@ public class BookingServiceImpl implements BookingService{
                 () -> new NotFoundException("couldnot fetch the user from the given token")
         );
 
-        Booking booking = new Booking();
-        booking.setUser(user);
-        booking.setConsumer(SecurityUtils.getCurrentUsername());
+        reservationArena.setUser(user);
+        reservationArena.setConsumer(SecurityUtils.getCurrentUsername());
 
-        bookingRepository.save(booking);
+        bookingRepository.save(reservationArena);
         return modelMapper.map(reservationArena, ReservationArenaResultDto.class);
     }
 

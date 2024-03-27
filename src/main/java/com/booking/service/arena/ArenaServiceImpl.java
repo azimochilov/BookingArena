@@ -19,6 +19,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,20 +31,21 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class ArenaServiceImpl implements ArenaService{
+public class ArenaServiceImpl implements ArenaService {
     private final ArenaRepository arenaRepository;
     private final ArenaInfoService arenaInfoService;
     private final UserRepository userRepository;
     private final ImageService imageService;
     private final ModelMapper modelMapper;
+
     @Override
     public ArenaResultDto getById(Long id) {
 
         Arena arena = arenaRepository.findById(id).orElseThrow(
-                ()-> new NotFoundException("not found with given id")
+                () -> new NotFoundException("not found with given id")
         );
 
-        return modelMapper.map(arena,ArenaResultDto.class);
+        return modelMapper.map(arena, ArenaResultDto.class);
     }
 
     @Override
@@ -82,11 +84,11 @@ public class ArenaServiceImpl implements ArenaService{
 
         arenaRepository.save(arena);
 
-        ArenaResultDto arenaResultDto = modelMapper.map(arenaCreationDto,ArenaResultDto.class);
+        ArenaResultDto arenaResultDto = modelMapper.map(arenaCreationDto, ArenaResultDto.class);
         arenaResultDto.getArenaInfo().setWorkedFrom(arenaCreationDto.getArenaInfo().getWorkedFrom());
         arenaResultDto.getArenaInfo().setWorkedTo(arenaCreationDto.getArenaInfo().getWorkedTo());
 
-        return  arenaResultDto;
+        return arenaResultDto;
     }
 
     @Override
@@ -98,13 +100,17 @@ public class ArenaServiceImpl implements ArenaService{
         arena.setDescription(arenaDto.getDescription());
 
         ArenaInfoResultDto arenaInfo = arenaInfoService.update(arena.getArenaInfo().getId(), arenaDto.getArenaInfo());
-        arena.setArenaInfo(modelMapper.map(arenaInfo,ArenaInfo.class));
+        arena.setArenaInfo(modelMapper.map(arenaInfo, ArenaInfo.class));
         arenaRepository.save(arena);
-        return modelMapper.map(arena,ArenaResultDto.class);
+        return modelMapper.map(arena, ArenaResultDto.class);
     }
 
     public List<ArenaResultDto> getByFilter(FiltersDto filters) {
-        List<Arena> filtiredArenas = arenaRepository.findFilteredAndSortedArenas(filters.getCity(), filters.getLatitude(), filters.getLongitude(), filters.getFrom(), filters.getTo());
+        Sort sort = filters.getDirection().equalsIgnoreCase("asc") ?
+                Sort.by("distance").ascending() :
+                Sort.by("distance").descending();
+        List<Arena> filtiredArenas = arenaRepository
+                .findFilteredAndSortedArenas(filters.getCity(), filters.getLatitude(), filters.getLongitude(), filters.getFrom(), filters.getTo(), sort);
         List<ArenaResultDto> arenaResultDTOs = filtiredArenas.stream()
                 .map(arena -> modelMapper.map(arena, ArenaResultDto.class))
                 .collect(Collectors.toList());
