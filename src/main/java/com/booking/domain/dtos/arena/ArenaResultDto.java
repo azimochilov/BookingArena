@@ -17,7 +17,9 @@ public class ArenaResultDto {
 
         private String name;
         private String description;
+        @Builder.Default
         private boolean status = true;
+
         private ArenaInfoResultDto arenaInfo;
         @JsonIgnore
         private MultipartFile imageFile;

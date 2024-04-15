@@ -32,10 +32,10 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class ArenaServiceImpl implements ArenaService {
+
     private final ArenaRepository arenaRepository;
     private final ArenaInfoService arenaInfoService;
     private final UserRepository userRepository;
-    private final ImageService imageService;
     private final ModelMapper modelMapper;
 
     @Override
@@ -50,17 +50,16 @@ public class ArenaServiceImpl implements ArenaService {
 
     @Override
     public List<ArenaResultDto> getAll() {
+
         List<Arena> arenas = arenaRepository.findAll();
         List<ArenaResultDto> arenaResultDTOs = arenas.stream()
                 .map(arena -> modelMapper.map(arena, ArenaResultDto.class))
                 .collect(Collectors.toList());
         return arenaResultDTOs;
-
     }
 
     @Override
     public ArenaResultDto create(ArenaCreationDto arenaCreationDto) {
-
 
         Arena arena = new Arena();
         arena.setArenaInfo(modelMapper.map(arenaCreationDto.getArenaInfo(), ArenaInfo.class));
@@ -124,4 +123,5 @@ public class ArenaServiceImpl implements ArenaService {
         );
         arenaRepository.delete(arena);
     }
+
 }

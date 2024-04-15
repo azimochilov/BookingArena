@@ -9,6 +9,7 @@ import com.booking.service.role.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/role")
-//@PreAuthorize("hasAuthority('ROLE_PRIVILEGE_SERVICE')")
+@PreAuthorize("hasAuthority('ROLE_PRIVILEGE_SERVICE')")
 public class RoleController {
     private final RoleService roleService;
 

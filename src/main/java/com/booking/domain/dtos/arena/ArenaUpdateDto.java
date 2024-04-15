@@ -15,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class ArenaUpdateDto {
     private String name;
     private String description;
+    @Builder.Default
     private boolean status = true;
+
     private ArenaInfoUpdateDto arenaInfo;
     @JsonIgnore
     private MultipartFile imageFile;

@@ -15,6 +15,7 @@ public class ArenaCreationDto {
 
     private String name;
     private String description;
+    @Builder.Default
     private boolean status = true;
     private ArenaInfoCreationDto arenaInfo;
 

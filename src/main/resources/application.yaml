@@ -7,9 +7,9 @@ spring:
     baseline-on-migrate: true
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${DOCKER_DB_URL}
+    username: postgres
+    password: postgres
 
   jpa:
     hibernate:
